@@ -1,0 +1,8 @@
+{
+  "name": "the-world-of-beer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "d8c9c540"
+}
