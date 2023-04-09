@@ -6,7 +6,7 @@ import {
   IonImg,
   IonItem,
   IonList,
-  IonPage, IonProgressBar,
+  IonPage,
   IonTitle,
   IonToolbar
 } from "@ionic/react";
@@ -33,10 +33,10 @@ const Card: FC<any> = ({image_url, name, tagline}) => {
 }
 
 export const BeerList = () => {
-  const {beers, setBeerList, currentPage, changeCurrentPage, status} = useBeerList()
-  console.log(status)
+  const {beers, setBeerList, currentPage, changeCurrentPage} = useBeerList()
+
   useEffect(() => {
-    setBeerList({page: currentPage})
+    setBeerList()
   }, [setBeerList, currentPage])
 
   const handlePageClick = (event: { selected: number }) => {
@@ -49,17 +49,14 @@ export const BeerList = () => {
         <IonHeader>
           <IonToolbar>
             <IonTitle>Tab 1</IonTitle>
-            {status === 'loading' &&
-                <IonProgressBar type="indeterminate" color="primary"></IonProgressBar>
-            }
           </IonToolbar>
         </IonHeader>
         <IonContent>
           <IonList>
             {
-              beers.map(beer => {
+              beers.map((beer, i) => {
                 return (
-                    <Card {...beer}/>
+                    <Card key={i} {...beer}/>
                 )
               })
             }

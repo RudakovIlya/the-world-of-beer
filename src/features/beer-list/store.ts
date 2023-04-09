@@ -8,26 +8,27 @@ interface BeerListState {
   beers: any[]
   currentPage: number
   currentBeer: any
-  setBeerList: (params: { page: number, per_page?: number }) => void
+  setBeerList: () => void
   changeCurrentPage: (page: number) => void
 }
 
-export const useBeerList = create(persist(immer<BeerListState>((set) => ({
+export const useBeerList = create(persist(immer<BeerListState>((set, getState) => ({
   beers: [],
   status: 'idle',
   currentPage: 1,
   currentBeer: {},
-  setBeerList: async ({page, per_page = 5}) => {
+  setBeerList: async () => {
+    const currentPage = getState().currentPage
     set(state => {
       state.status = 'loading'
     })
     try {
-      const response = await beersService.getBeerList({page, per_page})
+      const response = await beersService.getBeerList({page: currentPage, per_page: 5})
       set(state => {
         state.beers = response.data
         state.status = 'success'
       })
-    }finally {
+    } finally {
       set(state => {
         state.status = 'idle'
       })
