@@ -1,0 +1,28 @@
+.item {
+  width: 100%;
+}
+
+.card {
+  margin: 5px 10px;
+  width: 100%;
+  padding: 0;
+}
+
+
+.img {
+  height: 250px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.text:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.title:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.subtitle:not(:last-child) {
+  margin-bottom: 6px;
+}

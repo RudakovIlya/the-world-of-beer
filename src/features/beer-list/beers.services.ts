@@ -1,9 +1,9 @@
 import {instance} from "../../services/api";
-import {BeerQuery} from "./beer.types";
+import {BeerQuery, BeerResponse} from "./beer.types";
 
 export const beersService = {
   getBeerList: (params: BeerQuery) => {
-    return instance.get('beers', {
+    return instance.get<BeerResponse[]>('beers', {
       params
     })
   },

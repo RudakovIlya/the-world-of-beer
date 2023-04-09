@@ -23,7 +23,7 @@ import '@ionic/react/css/text-transformation.css'
 import {FC} from 'react'
 
 import './theme/variables.css'
-import {BeerList} from "./features/beer-list/BeerList";
+import {BeerPage} from "./features/beer-list/BeerPage";
 
 setupIonicReact()
 
@@ -31,7 +31,7 @@ setupIonicReact()
 const App: FC = () => {
   return (
       <IonApp>
-        <BeerList/>
+        <BeerPage/>
       </IonApp>
   )
 }
