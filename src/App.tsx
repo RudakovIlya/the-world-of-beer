@@ -1,10 +1,5 @@
 import {
   IonApp,
-  IonCard,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle, IonContent, IonHeader,
-  IonImg, IonTitle, IonToolbar,
   setupIonicReact,
 } from '@ionic/react'
 
@@ -25,10 +20,9 @@ import '@ionic/react/css/text-alignment.css'
 import '@ionic/react/css/text-transformation.css'
 
 /* Theme variables */
-import {FC, useEffect, useState} from 'react'
+import {FC} from 'react'
 
 import './theme/variables.css'
-import {useBeerList} from "./features/beer-list/store";
 import {BeerList} from "./features/beer-list/BeerList";
 
 setupIonicReact()
