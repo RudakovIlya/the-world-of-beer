@@ -1,5 +1,5 @@
 import {
-  IonApp,
+  IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs,
   setupIonicReact,
 } from '@ionic/react'
 
@@ -24,6 +24,10 @@ import {FC} from 'react'
 
 import './theme/variables.css'
 import {BeerPage} from "./features/beer-list/BeerPage";
+import {IonReactRouter} from "@ionic/react-router";
+import {Route} from "react-router";
+import {ellipse} from "ionicons/icons";
+import {Tab3} from "./TestPage";
 
 setupIonicReact()
 
@@ -32,6 +36,21 @@ const App: FC = () => {
   return (
       <IonApp>
         <BeerPage/>
+        <IonReactRouter>
+          <IonTabs>
+            <IonRouterOutlet>
+              <Route exact path="/test">
+                <Tab3/>
+              </Route>
+            </IonRouterOutlet>
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="tab2" href="/test">
+                <IonIcon aria-hidden="true" icon={ellipse}/>
+                <IonLabel>Tab 2</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
+        </IonReactRouter>
       </IonApp>
   )
 }
