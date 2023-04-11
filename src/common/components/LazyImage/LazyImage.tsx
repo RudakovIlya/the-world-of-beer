@@ -1,7 +1,7 @@
-import { type FC } from 'react'
+import {type FC} from 'react'
 import cls from './LazyImage.module.css'
-import { IonSkeletonText } from '@ionic/react'
-import { useLazyImage } from '../../hooks/use-lazy-image'
+import {IonSkeletonText} from '@ionic/react'
+import {useLazyImage} from '../../hooks/use-lazy-image'
 
 interface ILazyImage {
   loaderSize?: {
@@ -13,8 +13,8 @@ interface ILazyImage {
   alt: string
 }
 
-export const LazyImage: FC<ILazyImage> = ({ url, loaderSize, className, alt }) => {
-  const { imageLoaded, imagesIsLoading } = useLazyImage(url)
+export const LazyImage: FC<ILazyImage> = ({url, loaderSize, className, alt}) => {
+  const {imageLoaded, imagesIsLoading} = useLazyImage(url)
   return <>
     {imagesIsLoading && <IonSkeletonText animated style={loaderSize}/>}
     <img

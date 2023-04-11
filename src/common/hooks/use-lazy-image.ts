@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import {useRef, useState} from 'react'
 
 interface UseLazyImage {
   imagesIsLoading: boolean
@@ -9,11 +9,11 @@ export const useLazyImage = (image: string): UseLazyImage => {
   const [imagesIsLoading, setLoading] = useState(true)
   const counter = useRef(0)
 
-  const imageLoaded = (event: any): void => {
+  const imageLoaded = (): void => {
     counter.current += 1
     if (counter.current <= image.length) {
       setLoading(false)
     }
   }
-  return { imagesIsLoading, imageLoaded }
+  return {imagesIsLoading, imageLoaded}
 }

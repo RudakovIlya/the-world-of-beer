@@ -1,4 +1,4 @@
-import { type AxiosError, isAxiosError } from 'axios'
+import {type AxiosError, isAxiosError} from 'axios'
 
 export const errorUtils = (e: unknown): string => {
   const err = e as Error | AxiosError

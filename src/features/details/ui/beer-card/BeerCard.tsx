@@ -9,39 +9,39 @@ import {
   IonText,
   IonToast
 } from '@ionic/react'
-import { heart } from 'ionicons/icons'
-import { type FC, memo } from 'react'
-import { type BeerResponse } from '../../../beer-list/beer.types'
-import { LazyImage } from '../../../../common/components/LazyImage/LazyImage'
+import {heart} from 'ionicons/icons'
+import {type FC, memo} from 'react'
+import {type BeerResponse} from '../../../beer-list/beer.types'
+import {LazyImage} from '../../../../common/components/LazyImage/LazyImage'
 
 interface IBeerCard {
   beer: Pick<BeerResponse, 'description' | 'name' | 'abv' | 'tagline' | 'image_url'>
 }
 
-export const BeerCard: FC<IBeerCard> = memo(({ beer: { tagline, abv, description, name, image_url: imageUrl } }) => {
+export const BeerCard: FC<IBeerCard> = memo(({beer: {tagline, abv, description, name, image_url: imageUrl}}) => {
   return (
-    <>
-      <LazyImage className={cls.img} url={imageUrl} alt={name} loaderSize={{ height: '350px' }}/>
-      <IonCardHeader>
-        <IonText className={cls.text}>Alcohol by volume: {abv}</IonText>
-        <IonCardTitle className={cls.title}>{name}</IonCardTitle>
-        <IonCardSubtitle className={cls.subtitle}>{tagline}</IonCardSubtitle>
-      </IonCardHeader>
-      <IonCardContent>
-        <IonText className={cls.description}>
-          {description}
-        </IonText>
-        <p>
-          <IonButton id="open-toast">
-            <IonIcon slot="start" icon={heart}/>
-            Add to favorites
-          </IonButton>
-        </p>
-      </IonCardContent>
-      <IonToast color={'success'}
-                trigger="open-toast"
-                message={`${name} added to favorites`}
-                duration={3000}/>
-    </>
+      <>
+        <LazyImage className={cls.img} url={imageUrl} alt={name} loaderSize={{height: '350px'}}/>
+        <IonCardHeader>
+          <IonText className={cls.text}>Alcohol by volume: {abv}</IonText>
+          <IonCardTitle className={cls.title}>{name}</IonCardTitle>
+          <IonCardSubtitle className={cls.subtitle}>{tagline}</IonCardSubtitle>
+        </IonCardHeader>
+        <IonCardContent>
+          <IonText className={cls.description}>
+            {description}
+          </IonText>
+          <p>
+            <IonButton id="open-toast">
+              <IonIcon slot="start" icon={heart}/>
+              Add to favorites
+            </IonButton>
+          </p>
+        </IonCardContent>
+        <IonToast color={'success'}
+                  trigger="open-toast"
+                  message={`${name} added to favorites`}
+                  duration={3000}/>
+      </>
   )
 })

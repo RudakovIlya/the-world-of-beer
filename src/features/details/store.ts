@@ -1,8 +1,8 @@
-import { create } from 'zustand'
-import { immer } from 'zustand/middleware/immer'
-import { type BeerResponse } from '../beer-list/beer.types'
-import { beerService } from './details.services'
-import { errorUtils } from '../../common/utils/error-utils'
+import {create} from 'zustand'
+import {immer} from 'zustand/middleware/immer'
+import {type BeerResponse} from '../beer-list/beer.types'
+import {beerService} from './details.services'
+import {errorUtils} from '../../common/utils/error-utils'
 
 interface BeerState {
   status: 'idle' | 'loading' | 'success' | 'failed'
@@ -11,7 +11,7 @@ interface BeerState {
   getBeer: (id: number) => void
 }
 
-export const useBeer = create(immer<BeerState>((set, getState) => ({
+export const useBeer = create(immer<BeerState>((set) => ({
   beer: {} as BeerResponse,
   status: 'idle',
   errorMessage: '',

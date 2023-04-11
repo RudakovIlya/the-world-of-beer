@@ -1,5 +1,5 @@
-import { defineCustomElements } from '@ionic/pwa-elements/loader'
-import { createRoot } from 'react-dom/client'
+import {defineCustomElements} from '@ionic/pwa-elements/loader'
+import {createRoot} from 'react-dom/client'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'

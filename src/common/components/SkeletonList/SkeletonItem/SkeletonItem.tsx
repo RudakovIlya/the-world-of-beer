@@ -1,6 +1,6 @@
 import cls from './SkeletonItem.module.css'
-import { IonCard, IonItem, IonLabel, IonSkeletonText } from '@ionic/react'
-import { type FC } from 'react'
+import {IonCard, IonItem, IonLabel, IonSkeletonText} from '@ionic/react'
+import {type FC} from 'react'
 
 export const SkeletonItem: FC<{ className?: string }> = () => {
   return <IonItem className={cls.item}>

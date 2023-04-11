@@ -1,9 +1,9 @@
-import { create } from 'zustand'
-import { immer } from 'zustand/middleware/immer'
-import { persist } from 'zustand/middleware'
-import { beersService } from './beers.services'
-import { type BeerResponse } from './beer.types'
-import { errorUtils } from '../../common/utils/error-utils'
+import {create} from 'zustand'
+import {immer} from 'zustand/middleware/immer'
+import {persist} from 'zustand/middleware'
+import {beersService} from './beers.services'
+import {type BeerResponse} from './beer.types'
+import {errorUtils} from '../../common/utils/error-utils'
 
 interface BeerListState {
   status: 'idle' | 'loading' | 'success' | 'failed'
@@ -32,7 +32,7 @@ export const useBeerList = create(persist(immer<BeerListState>((set, getState) =
       state.status = 'loading'
     })
     try {
-      const response = await beersService.getBeerList({ page: currentPage, per_page: 5 })
+      const response = await beersService.getBeerList({page: currentPage, per_page: 5})
       set(state => {
         state.beers = response.data
         state.status = 'success'
