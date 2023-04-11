@@ -6,7 +6,7 @@
 
 Клонировать репозиторий на локальную машину:
 
-- ```git clone``` https://github.com/Rudakovilya/repo.git
+- ```git clone``` https://github.com/RudakovIlya/the-world-of-beer.git
 
 #### Перейти в папку с проектом:
 - ```cd repo```
