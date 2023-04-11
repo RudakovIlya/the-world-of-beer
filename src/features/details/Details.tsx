@@ -14,7 +14,7 @@ export const Details: FC = () => {
   const history = useHistory()
   useEffect(() => {
     getBeer(+id)
-  }, [id])
+  }, [id, getBeer])
 
   return (
       <IonPage>
