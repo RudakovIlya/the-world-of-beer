@@ -19,6 +19,7 @@ import '@ionic/react/css/text-transformation.css'
 import {type FC, lazy, Suspense} from 'react'
 
 import './theme/variables.css'
+
 import {IonReactRouter} from '@ionic/react-router'
 import {Route, Switch} from 'react-router'
 import {SkeletonCard} from './common/components/skeleton-card/SkeletonCard'
