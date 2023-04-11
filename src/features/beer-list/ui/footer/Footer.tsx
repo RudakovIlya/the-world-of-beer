@@ -11,7 +11,7 @@ export const Footer = () => {
   const handlePageClick = useCallback((event: { selected: number }): void => {
     const newOffset = event.selected + 1
     onChangePage(newOffset)
-  }, [])
+  }, [onChangePage])
 
   return (
       <IonFooter>

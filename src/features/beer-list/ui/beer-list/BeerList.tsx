@@ -12,7 +12,7 @@ export const BeerList: FC = () => {
 
   const onClick = useCallback((id: number) => {
     return () => history.push(`/beer/${id}`)
-  }, [])
+  }, [history])
 
   const listItem = beers.map((beer, i) => {
     return (
