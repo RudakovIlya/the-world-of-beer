@@ -1,22 +1,22 @@
-import {Pagination} from "../pagination/Pagination";
-import {IonFooter, IonToolbar} from "@ionic/react";
-import {useBeerList} from "../../store";
+import { Pagination } from '../pagination/Pagination'
+import { IonFooter, IonToolbar } from '@ionic/react'
+import { useBeerList } from '../../store'
 
 export const Footer = () => {
-  const {changeCurrentPage} = useBeerList()
+  const { changeCurrentPage } = useBeerList()
 
-  const handlePageClick = (event: { selected: number }) => {
+  const handlePageClick = (event: { selected: number }): void => {
     const newOffset = event.selected + 1
-    changeCurrentPage(newOffset);
-  };
+    changeCurrentPage(newOffset)
+  }
 
   return (
-      <>
-        <IonFooter>
-          <IonToolbar>
-            <Pagination pageCount={3} handlePageClick={handlePageClick}/>
-          </IonToolbar>
-        </IonFooter>
-      </>
+    <>
+      <IonFooter>
+        <IonToolbar>
+          <Pagination pageCount={3} handlePageClick={handlePageClick}/>
+        </IonToolbar>
+      </IonFooter>
+    </>
   )
-};
+}

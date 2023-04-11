@@ -6,7 +6,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 const container = document.getElementById('root')
 const root = createRoot(container!)
-root.render(<App />)
+root.render(<App/>)
 
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window)

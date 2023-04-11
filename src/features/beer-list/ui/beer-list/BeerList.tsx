@@ -1,37 +1,34 @@
-import {IonList} from "@ionic/react";
-import {Card} from "../card/Card";
-import {useBeerList} from "../../store";
-import {lazy, Suspense, useState} from "react";
+import { IonList } from '@ionic/react'
+import { Card } from '../card/Card'
+import { useBeerList } from '../../store'
 
 import cls from './BeerList.module.css'
+import { useHistory } from 'react-router'
+import { type BeerResponse } from '../../beer.types'
+import { type FC } from 'react'
 
-const Modal = lazy(() => import('../modal/Modal').then((module) => ({default: module.Modal})))
+export const BeerList: FC = () => {
+  const { beers, setCurrentBeer } = useBeerList()
+  const history = useHistory()
 
-export const BeerList = () => {
-  const {beers, setCurrentBeer} = useBeerList()
-  const [isOpen, setIsOpen] = useState(false)
-  const onClick = (data: any) => {
-
+  const onClick = (data: BeerResponse) => {
     return () => {
+      history.push(`/beer/${data.id}`)
       setCurrentBeer(data)
-      setIsOpen(true)
     }
   }
 
   const listItem = beers.map((beer, i) => {
     return (
-        <Card key={i} beer={beer} onClick={onClick(beer)}/>
+      <Card key={i} beer={beer} onClick={onClick(beer)}/>
     )
   })
 
   return (
-      <div className={cls.container}>
-        <IonList>
-          {listItem}
-        </IonList>
-        <Suspense fallback={'Loading'}>
-          <Modal isOpen={isOpen} setIsOpen={setIsOpen}/>
-        </Suspense>
-      </div>
+    <div className={cls.container}>
+      <IonList>
+        {listItem}
+      </IonList>
+    </div>
   )
-};
+}

@@ -1,0 +1,19 @@
+.card > *:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.thumb {
+  height: 350px;
+}
+
+.text {
+  height: 29px;
+}
+
+.title {
+  height: 40px;
+}
+
+.description {
+  height: 140px;
+}

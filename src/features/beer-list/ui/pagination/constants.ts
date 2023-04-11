@@ -9,6 +9,6 @@ export const paginationClasses = {
   nextLinkClassName: cls['page-link'],
   breakClassName: cls['page-item'],
   breakLinkClassName: cls['page-link'],
-  activeClassName: cls['active'],
-  previousLinkClassName: cls['page-link'],
+  activeClassName: cls.active,
+  previousLinkClassName: cls['page-link']
 }

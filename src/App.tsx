@@ -1,7 +1,4 @@
-import {
-  IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs,
-  setupIonicReact,
-} from '@ionic/react'
+import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
@@ -19,39 +16,41 @@ import '@ionic/react/css/padding.css'
 import '@ionic/react/css/text-alignment.css'
 import '@ionic/react/css/text-transformation.css'
 
-/* Theme variables */
-import {FC} from 'react'
+import { type FC, lazy, Suspense } from 'react'
 
 import './theme/variables.css'
-import {BeerPage} from "./features/beer-list/BeerPage";
-import {IonReactRouter} from "@ionic/react-router";
-import {Route} from "react-router";
-import {ellipse} from "ionicons/icons";
-import {Tab3} from "./TestPage";
+import { IonReactRouter } from '@ionic/react-router'
+import { Route, Switch } from 'react-router'
+import { SkeletonCard } from './common/components/SkeletonCard/SkeletonCard'
+import { SkeletonList } from './common/components/SkeletonList/SkeletonList'
+
+const Details = lazy(() => import('./features/details/Details').then((module) => ({ default: module.Details })))
+
+const BeerPage = lazy(() => import('./features/beer-list/BeerPage').then((module) => ({ default: module.BeerPage })))
 
 setupIonicReact()
 
-
 const App: FC = () => {
   return (
-      <IonApp>
-        <BeerPage/>
-        <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route exact path="/test">
-                <Tab3/>
-              </Route>
-            </IonRouterOutlet>
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="tab2" href="/test">
-                <IonIcon aria-hidden="true" icon={ellipse}/>
-                <IonLabel>Tab 2</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </IonReactRouter>
-      </IonApp>
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Switch>
+            <Route exact path="/">
+              <Suspense fallback={<SkeletonList/>}>
+                <BeerPage/>
+              </Suspense>
+            </Route>
+            <Route exact path="/beer/:id">
+              <Suspense fallback={<SkeletonCard/>}>
+                <Details/>
+              </Suspense>
+            </Route>
+          </Switch>
+        </IonRouterOutlet>
+
+      </IonReactRouter>
+    </IonApp>
   )
 }
 
