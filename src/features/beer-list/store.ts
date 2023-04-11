@@ -5,17 +5,15 @@ import {beersService} from './beers.services'
 import {type BeerResponse} from './beer.types'
 import {errorUtils} from '../../common/utils/error-utils'
 
-interface BeerListState {
+export interface BeerListState {
   status: 'idle' | 'loading' | 'success' | 'failed'
   errorMessage: string
   beers: BeerResponse[]
-  currentBeer: BeerResponse
   favorites: BeerResponse[]
   currentPage: number
   setBeerList: () => void
-  setCurrentBeer: (data: BeerResponse) => void
   changeCurrentPage: (page: number) => void
-  addFavorite: () => void
+  addFavorite: (beer: BeerResponse) => void
   removeFavorite: (id: number) => void
 }
 
@@ -24,7 +22,6 @@ export const useBeerList = create(persist(immer<BeerListState>((set, getState) =
   status: 'idle',
   errorMessage: '',
   currentPage: 1,
-  currentBeer: {} as BeerResponse,
   favorites: [],
   setBeerList: async () => {
     const currentPage = getState().currentPage
@@ -45,23 +42,18 @@ export const useBeerList = create(persist(immer<BeerListState>((set, getState) =
       })
     }
   },
-  setCurrentBeer: (data: BeerResponse) => {
-    set((state) => {
-      state.currentBeer = data
-    })
-  },
   changeCurrentPage: (page) => {
     set(state => {
       state.currentPage = page
     })
   },
-  addFavorite: () => {
-    const favorite = getState().favorites.find(item => item.id === getState().currentBeer.id)
-    set(state => {
-      if (!favorite) {
-        state.favorites.push(state.currentBeer)
-      }
-    })
+  addFavorite: (beer) => {
+    const currentBeer = getState().favorites.find(item => item.id === beer.id)
+    if (!currentBeer) {
+      set(state => {
+        state.favorites.push(beer)
+      })
+    }
   },
   removeFavorite: (id) => {
     set((state) => {

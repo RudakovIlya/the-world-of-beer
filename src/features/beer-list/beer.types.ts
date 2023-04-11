@@ -10,7 +10,7 @@ export interface BeerResponse {
   first_brewed: string
   description: string
   image_url: string
-  abv: number // Крепость
+  abv: number
   ibu: number
   target_fg: number
   target_og: number
@@ -22,3 +22,4 @@ export interface BeerResponse {
   brewers_tips: string
   contributed_by: string
 }
+

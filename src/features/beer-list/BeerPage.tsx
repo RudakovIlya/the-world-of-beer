@@ -3,19 +3,20 @@ import {useBeerList} from './store'
 import {useEffect, useRef} from 'react'
 import {BeerList} from './ui/beer-list/BeerList'
 import {Footer} from './ui/footer/Footer'
-import {SkeletonList} from '../../common/components/SkeletonList/SkeletonList'
-import {Favorites} from './ui/favorites/Favorites'
 import {Header} from '../../common/components/header/Header'
+import {FavoritesModal} from "../../widgets/favorites-modal/FavoritesModal";
+import {SkeletonList} from "../../common/components/skeleton-list/SkeletonList";
+import {currentPageSelector, errorMessageSelector, fetchBeerListSelector, fetchStatusSelector} from "./selectors";
 
 export const BeerPage = () => {
-  const setBeerList = useBeerList(state => state.setBeerList)
-  const currentPage = useBeerList(state => state.currentPage)
-  const status = useBeerList(state => state.status)
-  const error = useBeerList(state => state.errorMessage)
+  const setBeerList = useBeerList(fetchBeerListSelector)
+  const page = useBeerList(currentPageSelector)
+  const status = useBeerList(fetchStatusSelector)
+  const error = useBeerList(errorMessageSelector)
 
   useEffect(() => {
     setBeerList()
-  }, [setBeerList, currentPage])
+  }, [setBeerList, page])
 
   const ref = useRef<null | HTMLIonContentElement>(null)
 
@@ -27,7 +28,7 @@ export const BeerPage = () => {
 
   useEffect(() => {
     scrollToTop(500)
-  }, [currentPage])
+  }, [])
 
   return (
       <>
@@ -38,7 +39,7 @@ export const BeerPage = () => {
             {status === 'success' && <BeerList/>}
             {status === 'failed' && <IonTitle color={'danger'}>{error}</IonTitle>}
           </IonContent>
-          <Favorites/>
+          <FavoritesModal/>
           <Footer/>
           <IonToast position={'top'}
                     color={'danger'}

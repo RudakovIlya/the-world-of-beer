@@ -1,17 +1,21 @@
-import {IonContent, IonFab, IonFabButton, IonIcon, IonPage} from '@ionic/react'
+import {IonContent, IonPage, IonTitle, IonToast} from '@ionic/react'
 import {type FC, useEffect} from 'react'
 import {useBeer} from './store'
-import {useHistory, useParams} from 'react-router'
+import {useParams} from 'react-router'
 import {Header} from '../../common/components/header/Header'
 import {BeerCard} from './ui/beer-card/BeerCard'
-import {SkeletonCard} from '../../common/components/SkeletonCard/SkeletonCard'
+import {SkeletonCard} from '../../common/components/skeleton-card/SkeletonCard'
 import {Footer} from './ui/footer/Footer'
-import {home} from 'ionicons/icons'
+import {beerSelector, errorMessageSelector, getBeerSelector, statusSelector} from "./selectors";
 
 export const Details: FC = () => {
-  const {beer, getBeer, status} = useBeer()
+  const beer = useBeer(beerSelector)
+  const getBeer = useBeer(getBeerSelector)
+  const status = useBeer(statusSelector)
+  const errorMessage = useBeer(errorMessageSelector)
+
   const {id} = useParams<{ id: string }>()
-  const history = useHistory()
+
   useEffect(() => {
     getBeer(+id)
   }, [id, getBeer])
@@ -22,15 +26,14 @@ export const Details: FC = () => {
         <IonContent>
           {status === 'success' && <BeerCard beer={beer}/>}
           {status === 'loading' && <SkeletonCard/>}
+          {status === 'failed' && <IonTitle style={{textAlign: 'center'}} color={'danger'}>{errorMessage}</IonTitle>}
         </IonContent>
         <Footer to={id}/>
-        <IonFab>
-          <IonFabButton onClick={() => {
-            history.push('/')
-          }}>
-            <IonIcon icon={home}></IonIcon>
-          </IonFabButton>
-        </IonFab>
+        <IonToast position={'middle'}
+                  color={'danger'}
+                  isOpen={status === 'failed'}
+                  message={`${errorMessage}`}
+                  duration={2000}/>
       </IonPage>
   )
 }

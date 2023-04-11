@@ -6,13 +6,13 @@ export const SkeletonCard: FC = () => {
   return (
       <IonCard className={cls.card}>
         <IonLabel>
-          <IonSkeletonText className={cls.thumb} animated={true}/>
+          <IonSkeletonText className={cls.thumb} animated/>
 
-          <IonSkeletonText className={cls.text} animated={true}/>
+          <IonSkeletonText className={cls.text} animated/>
 
-          <IonSkeletonText className={cls.title} animated={true}/>
+          <IonSkeletonText className={cls.title} animated/>
 
-          <IonSkeletonText className={cls.description} animated={true}/>
+          <IonSkeletonText className={cls.description} animated/>
 
         </IonLabel>
       </IonCard>

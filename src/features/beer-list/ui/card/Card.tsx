@@ -2,7 +2,7 @@ import {type FC, memo} from 'react'
 import {IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonItem, IonText} from '@ionic/react'
 import {type BeerResponse} from '../../beer.types'
 import cls from './Card.module.css'
-import {LazyImage} from '../../../../common/components/LazyImage/LazyImage'
+import {LazyImage} from '../../../../common/components/lazy-image/LazyImage'
 
 interface ICard {
   beer: Pick<BeerResponse, 'image_url' | 'name' | 'tagline' | 'abv' | 'id'>

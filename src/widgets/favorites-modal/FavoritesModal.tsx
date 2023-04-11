@@ -15,22 +15,30 @@ import {
 } from '@ionic/react'
 import {heart, trashOutline} from 'ionicons/icons'
 import {type FC, useState} from 'react'
-import {useBeerList} from '../../store'
+import {useBeerList} from "../../features/beer-list/store";
 import cls from './Favorites.module.css'
+import {useHistory} from "react-router";
+import {favoritesSelector, removeFavoriteSelector} from "../../features/beer-list/selectors";
 
-export const Favorites: FC = () => {
+export const FavoritesModal: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const {favorites, removeFavorite} = useBeerList()
+
+  const favorites = useBeerList(favoritesSelector)
+  const removeFavorite = useBeerList(removeFavoriteSelector)
+
+  const {push} = useHistory()
+
   const favItems = favorites.map(({name, tagline, abv, image_url: imageUrl, id}) => {
     return (
-        <IonItem className={`${cls.item}`} key={name} lines="none">
+        <IonItem onClick={() => push(`/beer/${id}`)} className={`${cls.item}`} key={name} lines="none">
           <img src={imageUrl} alt={name}/>
           <IonLabel className={cls.label}>
             <h2>{name}</h2>
             <p>{tagline}</p>
             <p>Alcohol by volume: {abv}</p>
           </IonLabel>
-          <IonButton color={'danger'} onClick={() => {
+          <IonButton color={'danger'} onClick={(e) => {
+            e.stopPropagation()
             removeFavorite(id)
           }}>
             <IonIcon icon={trashOutline}/>
@@ -38,6 +46,7 @@ export const Favorites: FC = () => {
         </IonItem>
     )
   })
+
   return <>
     <IonModal isOpen={isOpen}>
       <IonHeader>
@@ -57,9 +66,8 @@ export const Favorites: FC = () => {
                   {favItems}
                 </IonList>
             )
-            : <IonTitle color={'warning'}>Favorites list is empty</IonTitle>
+            : <IonTitle className={cls.title} color={'warning'}>Favorites list is empty</IonTitle>
         }
-
       </IonContent>
     </IonModal>
     <IonFab onClick={() => {

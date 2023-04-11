@@ -1,4 +1,4 @@
-import {type FC} from 'react'
+import {type FC, memo} from 'react'
 import cls from './LazyImage.module.css'
 import {IonSkeletonText} from '@ionic/react'
 import {useLazyImage} from '../../hooks/use-lazy-image'
@@ -13,7 +13,7 @@ interface ILazyImage {
   alt: string
 }
 
-export const LazyImage: FC<ILazyImage> = ({url, loaderSize, className, alt}) => {
+export const LazyImage: FC<ILazyImage> = memo(({url, loaderSize, className, alt}) => {
   const {imageLoaded, imagesIsLoading} = useLazyImage(url)
   return <>
     {imagesIsLoading && <IonSkeletonText animated style={loaderSize}/>}
@@ -22,4 +22,4 @@ export const LazyImage: FC<ILazyImage> = ({url, loaderSize, className, alt}) => 
         className={`${className} ${!imagesIsLoading ? cls.visible : cls.img}`}
         src={url} alt={alt}/>
   </>
-}
+})

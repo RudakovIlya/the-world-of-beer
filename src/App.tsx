@@ -21,8 +21,8 @@ import {type FC, lazy, Suspense} from 'react'
 import './theme/variables.css'
 import {IonReactRouter} from '@ionic/react-router'
 import {Route, Switch} from 'react-router'
-import {SkeletonCard} from './common/components/SkeletonCard/SkeletonCard'
-import {SkeletonList} from './common/components/SkeletonList/SkeletonList'
+import {SkeletonCard} from './common/components/skeleton-card/SkeletonCard'
+import {SkeletonList} from "./common/components/skeleton-list/SkeletonList";
 
 const Details = lazy(() => import('./features/details/Details').then((module) => ({default: module.Details})))
 

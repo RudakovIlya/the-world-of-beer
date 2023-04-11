@@ -4,7 +4,7 @@ import {type BeerResponse} from '../beer-list/beer.types'
 import {beerService} from './details.services'
 import {errorUtils} from '../../common/utils/error-utils'
 
-interface BeerState {
+export interface BeerState {
   status: 'idle' | 'loading' | 'success' | 'failed'
   errorMessage: string
   beer: BeerResponse
@@ -29,6 +29,7 @@ export const useBeer = create(immer<BeerState>((set) => ({
       const error = errorUtils(e)
       set((state) => {
         state.errorMessage = error
+        state.status = 'failed'
       })
     }
   }

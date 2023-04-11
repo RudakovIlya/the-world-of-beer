@@ -1,7 +1,7 @@
 import {type FC} from 'react'
 import {IonList} from '@ionic/react'
 import cls from './Skeleton.module.css'
-import {SkeletonItem} from './SkeletonItem/SkeletonItem'
+import {SkeletonItem} from "./skeleton-item/SkeletonItem";
 
 interface ISkeletonList {
   amount?: number

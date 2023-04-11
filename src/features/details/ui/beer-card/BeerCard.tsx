@@ -12,13 +12,23 @@ import {
 import {heart} from 'ionicons/icons'
 import {type FC, memo} from 'react'
 import {type BeerResponse} from '../../../beer-list/beer.types'
-import {LazyImage} from '../../../../common/components/LazyImage/LazyImage'
+import {LazyImage} from '../../../../common/components/lazy-image/LazyImage'
+import {useBeerList} from "../../../beer-list/store";
 
 interface IBeerCard {
-  beer: Pick<BeerResponse, 'description' | 'name' | 'abv' | 'tagline' | 'image_url'>
+  beer: BeerResponse
 }
 
-export const BeerCard: FC<IBeerCard> = memo(({beer: {tagline, abv, description, name, image_url: imageUrl}}) => {
+export const BeerCard: FC<IBeerCard> = memo(({beer}) => {
+
+  const {abv, description, name, image_url: imageUrl, tagline} = beer
+
+  const {addFavorite} = useBeerList()
+
+  const onAddBeerIntoFavorite = () => {
+    addFavorite(beer)
+  }
+
   return (
       <>
         <LazyImage className={cls.img} url={imageUrl} alt={name} loaderSize={{height: '350px'}}/>
@@ -32,7 +42,7 @@ export const BeerCard: FC<IBeerCard> = memo(({beer: {tagline, abv, description, 
             {description}
           </IonText>
           <p>
-            <IonButton id="open-toast">
+            <IonButton className={cls.description} onClick={onAddBeerIntoFavorite} id="open-toast">
               <IonIcon slot="start" icon={heart}/>
               Add to favorites
             </IonButton>
@@ -40,8 +50,10 @@ export const BeerCard: FC<IBeerCard> = memo(({beer: {tagline, abv, description, 
         </IonCardContent>
         <IonToast color={'success'}
                   trigger="open-toast"
+                  animated
+                  position={'top'}
                   message={`${name} added to favorites`}
-                  duration={3000}/>
+                  duration={500}/>
       </>
   )
 })

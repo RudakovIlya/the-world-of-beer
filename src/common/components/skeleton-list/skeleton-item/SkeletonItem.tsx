@@ -7,13 +7,13 @@ export const SkeletonItem: FC<{ className?: string }> = () => {
     <IonCard className={cls.card}>
       <IonLabel>
         <h3>
-          <IonSkeletonText className={cls.thumb} animated={true}></IonSkeletonText>
+          <IonSkeletonText className={cls.thumb} animated/>
         </h3>
         <p>
-          <IonSkeletonText className={cls.text} animated={true}></IonSkeletonText>
+          <IonSkeletonText className={cls.text} animated/>
         </p>
         <p>
-          <IonSkeletonText className={cls.title} animated={true}></IonSkeletonText>
+          <IonSkeletonText className={cls.title} animated/>
         </p>
       </IonLabel>
     </IonCard>
